@@ -1,0 +1,21 @@
+{
+  "name": "monday-reminder",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start:dev": "bun run src/index.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.1",
+    "grammy": "^1.37.0",
+    "hono": "^4.9.0",
+    "node-cron": "^4.2.1"
+  }
+}
