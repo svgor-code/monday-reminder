@@ -4,10 +4,18 @@ export interface ITask {
   id: number;
   name: string;
   repeat: Repeat;
+  time: string;
+  timezone: string;
+  day?: number;
+  month?: number;
   next_execution_time: number; // timestamp
 }
 
 export interface ICreateTask {
   name: string;
   repeat: Repeat;
+  time: string;
+  timezone: string;
+  day?: number;
+  month?: number;
 }

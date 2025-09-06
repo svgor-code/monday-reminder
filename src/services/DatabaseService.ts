@@ -34,7 +34,11 @@ export class DatabaseService {
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
         repeat TEXT NOT NULL,
-        next_execution_time INTEGER NOT NULL
+        next_execution_time INTEGER NOT NULL,
+        time TEXT NOT NULL,
+        timezone TEXT NOT NULL,
+        day INTEGER,
+        month INTEGER
       )
     `);
 

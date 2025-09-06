@@ -1,6 +1,7 @@
+import { DateTime } from 'luxon';
 import { Task } from "../entities/Task";
 import { UserTask } from "../entities/UserTask";
-import type { ICreateTask } from "../interfaces/task";
+import type { ICreateTask, Repeat } from "../interfaces/task";
 import type { IUserGroup } from "../interfaces/userGroup";
 import type { DatabaseService } from "./DatabaseService";
 import type { GroupsService } from "./GroupsService";
@@ -29,9 +30,23 @@ export class TasksService {
       return;
     }
 
+    const task = new Task(0, newTask.name, newTask.repeat, newTask.time, newTask.timezone, newTask.day, newTask.month);
+
     const createTx = this.dbService.db.transaction((users: IUserGroup[]) => {
-      const insertTask = this.dbService.db.prepare("INSERT INTO tasks (name, repeat, next_execution_time) VALUES (?, ?, ?)");
-      const createNewTaskResult = insertTask.run(newTask.name, newTask.repeat, 0);
+      const insertTask = this.dbService.db.prepare(
+        "INSERT INTO tasks (name, repeat, next_execution_time, time, timezone, day, month) VALUES (?, ?, ?, ?, ?, ?, ?)"
+      );
+
+      const createNewTaskResult = insertTask.run(
+        task.name,
+        task.repeat,
+        task.next_execution_time,
+        task.time,
+        task.timezone,
+        task.day ?? null,
+        task.month ?? null
+      );
+
       const task_id = createNewTaskResult.lastInsertRowid;
 
       if (!createNewTaskResult.changes) {
@@ -71,5 +86,4 @@ export class TasksService {
 
     return Boolean(deleteTaskResult.changes) && Boolean(deleteUserTasksResult.changes);
   }
-
 }

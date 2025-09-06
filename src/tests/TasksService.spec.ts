@@ -1,4 +1,3 @@
-
 import { beforeAll, expect, describe, test, afterAll } from 'bun:test';
 import { DatabaseService } from '../services/DatabaseService';
 import { TasksService } from '../services/TasksService';
@@ -9,6 +8,8 @@ import type { UserGroup } from '../entities/UserGroup';
 const newTask: ICreateTask = {
   name: "Track your time",
   repeat: 'weekdays',
+  time: '8:00',
+  timezone: 'Europe/London',
 }
 
 describe('TasksService', () => {
