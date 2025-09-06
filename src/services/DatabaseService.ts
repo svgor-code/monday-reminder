@@ -33,8 +33,7 @@ export class DatabaseService {
       CREATE TABLE IF NOT EXISTS tasks (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
-        is_complete INTEGER NOT NULL,
-        repeat INTEGER NOT NULL,
+        repeat TEXT NOT NULL,
         next_execution_time INTEGER NOT NULL
       )
     `);
@@ -58,7 +57,7 @@ export class DatabaseService {
       CREATE TABLE IF NOT EXISTS user_tasks (
         user_id INTEGER NOT NULL,
         task_id INTEGER NOT NULL,
-        is_complete INTEGER NOT NULL,
+        is_complete INTEGER NOT NULL DEFAULT 0,
         FOREIGN KEY(user_id) REFERENCES users(id),
         FOREIGN KEY(task_id) REFERENCES tasks(id)
       )

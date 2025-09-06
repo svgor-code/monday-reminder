@@ -94,7 +94,6 @@ describe('GroupsService', () => {
   })
 
   afterAll(() => {
-    databaseService.db.close();
   });
 })
 
